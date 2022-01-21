@@ -34,7 +34,9 @@
         state: present
         update_homebrew: yes
 
-    - name: Add openjdk to path
-      copy:
-        dest: ~/.zshrc
-        content: 'PATH="/usr/local/opt/openjdk/bin:$PATH"'
+    - name: Create symbolic link 
+      become: yes
+      file:
+        src: "/usr/local/opt/openjdk/libexec/openjdk.jdk"
+        dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
+        state: link
