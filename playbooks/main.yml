@@ -21,7 +21,9 @@
         - docker
         - intellij-idea
         - github
-    
+        - tableplus            
+        - graalvm/tap/graalvm-ce-java17       
+
     - name: "Install homebrew packages"
       community.general.homebrew:
         name: [
@@ -29,14 +31,32 @@
           'curl',
           'gradle',
           'java',
-          'kotlin'
+          'kotlin',
+          'maven',
+          'mysql@5.7'
         ]
         state: present
         update_homebrew: yes
 
-    - name: Create symbolic link 
+    - name: Create symbolic link to openjdk 
       become: yes
       file:
         src: "/usr/local/opt/openjdk/libexec/openjdk.jdk"
         dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
         state: link
+
+    - name: Add graalvm to path
+      lineinfile:
+        path: ~/.zshrc
+        line: export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home/bin:$PATH
+        insertafter: EOFi
+
+    - name: Set JAVA_HOME to gradle
+      lineinfile:
+        path: ~/.zshrc
+        line: export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home
+        insertafter: EOF
+
+
+    - name: Install native image with gu
+      ansible.builtin.command: source ~/.zshrc && gu install native-image
