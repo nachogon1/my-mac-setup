@@ -23,6 +23,25 @@
         - github
         - tableplus            
         - graalvm/tap/graalvm-ce-java17       
+   
+    - name: "Install aws"
+      shell: |
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
+        sudo rm AWSCLIV2.pkg
+
+    - name: Check aws is on path.
+      stat:
+        path: /usr/local/bin/aws
+      register: stat_result
+
+    - name: Add aws to path, if it doesnt exist already
+      lineinfile:
+        path: ~/.zshrc
+        line: export PATH=/usr/local/bin:$PATH
+        insertafter: EOF
+      when: not stat_result.stat.exists
+
 
     - name: "Install homebrew packages"
       community.general.homebrew:
@@ -33,7 +52,8 @@
           'java',
           'kotlin',
           'maven',
-          'mysql@5.7'
+          'mysql@5.7',
+          'cfn-lint'
         ]
         state: present
         update_homebrew: yes
@@ -49,7 +69,7 @@
       lineinfile:
         path: ~/.zshrc
         line: export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home/bin:$PATH
-        insertafter: EOFi
+        insertafter: EOF
 
     - name: Set JAVA_HOME to gradle
       lineinfile:
@@ -59,4 +79,4 @@
 
 
     - name: Install native image with gu
-      ansible.builtin.command: source ~/.zshrc && gu install native-image
+      shell: "source ~/.zshrc && gu install native-image"
