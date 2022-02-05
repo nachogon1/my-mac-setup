@@ -7,6 +7,7 @@ Ansible script to install my mac setup.
 ## Requirements
 
 Mac
+
 zsh Terminal
 
 ## Instructions
