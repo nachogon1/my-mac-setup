@@ -4,8 +4,12 @@
 
 Ansible script to install my mac setup.
 
-## Instructions
+## Requirements
 
+Mac
+zsh Terminal
+
+## Instructions
 
 
 If it is the first time you use it, install python with brew, link it, update pip and link pip
@@ -16,6 +20,7 @@ Install ansible: # Recommended by ansible
 Add ansible to path. Add to .zshrc
 `export PATH=“$HOME/Library/Python/3.9/bin:$PATH"`
 
+Then run:
 
 `ansible-playbook Projects/setup-installator/playbooks/main.yml --ask-become-pass`
 
