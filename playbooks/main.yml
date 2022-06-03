@@ -22,8 +22,9 @@
         - intellij-idea
         - github
         - tableplus            
-        - graalvm/tap/graalvm-ce-java17       
-   
+        - graalvm/tap/graalvm-ce-java17
+        - meld      
+        - nordvpn 
     - name: "Install aws"
       shell: |
         curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
@@ -48,12 +49,16 @@
         name: [
           'autoconf',
           'curl',
+          'openjdk@11', # Java 11
           'gradle',
           'java',
           'kotlin',
           'maven',
           'mysql@5.7',
-          'cfn-lint'
+          'cfn-lint',
+          'quarkusio/tap/quarkus',
+          'ktlint',
+          'jenv'
         ]
         state: present
         update_homebrew: yes
@@ -63,6 +68,13 @@
       file:
         src: "/usr/local/opt/openjdk/libexec/openjdk.jdk"
         dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
+        state: link
+
+    - name: Create symbolic link to openjdk11
+      become: yes
+      file:
+        src: "/usr/local/opt/openjdk@11/libexec/openjdk.jdk"
+        dest: "/Library/Java/JavaVirtualMachines/openjdk-11.jdk"
         state: link
 
     - name: Add graalvm to path
@@ -80,3 +92,5 @@
 
     - name: Install native image with gu
       shell: "source ~/.zshrc && gu install native-image"
+
+# Add session manager
