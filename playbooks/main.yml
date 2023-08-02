@@ -58,7 +58,8 @@
           'cfn-lint',
           'quarkusio/tap/quarkus',
           'ktlint',
-          'jenv'
+          'jenv',
+          'gh'  # github cli. Pr's from cli
         ]
         state: present
         update_homebrew: yes
