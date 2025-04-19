@@ -1,3 +1,6 @@
+#!/bin/zsh
+
+# Script to set up workers and master. Run $SPARK_HOME/sbin/stop-worker.sh to stop workers.
 export SPARK_WORKER_INSTANCES=4
 SPARK_WORKER_CORES=2 
 SPARK_WORKER_MEMORY=2g
