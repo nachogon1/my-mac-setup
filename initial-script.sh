@@ -8,9 +8,9 @@ else
   echo "🚀 Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  Add Homebrew to PATH in Zsh
+  # Add Homebrew to PATH in Zsh
   if [[ "$(uname)" == "Darwin" ]]; then
-    echo >> /Users/$(whoami)/.zprofile
+    echo >> /Users/a846987/.zprofile
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$(whoami)/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [[ "$(uname)" == "Linux" ]]; then
@@ -19,3 +19,5 @@ else
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
 fi
+
+source /Users/$(whoami)/.zprofile
