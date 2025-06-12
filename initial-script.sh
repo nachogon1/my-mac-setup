@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+echo "Installing Xcode Tools"
+
+xcode-select --install
+
 echo "Checking for Homebrew..."
 
 if command -v brew; then
