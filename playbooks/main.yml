@@ -14,17 +14,12 @@
         name: "{{ item }}"
       ignore_errors: yes
       with_items:
-        - google-chrome
-        - google-cloud-sdk
-        - visual-studio-code
         - iterm2
         - docker
         - intellij-idea
         - github
-        - tableplus            
-        - graalvm/tap/graalvm-ce-java17
-        - meld      
-        - nordvpn 
+        - nordvpn
+        - whatsapp 
     - name: "Install aws"
       shell: |
         curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
@@ -47,48 +42,41 @@
     - name: "Install homebrew packages"
       community.general.homebrew:
         name: [
-          'autoconf',
           'curl',
           'openjdk@11', # Java 11
           'gradle',
           'java',
-          'kotlin',
-          'maven',
-          'mysql@5.7',
           'cfn-lint',
-          'quarkusio/tap/quarkus',
-          'ktlint',
-          'jenv',
           'gh'  # github cli. Pr's from cli
         ]
         state: present
         update_homebrew: yes
 
-    - name: Create symbolic link to openjdk 
-      become: yes
-      file:
-        src: "/usr/local/opt/openjdk/libexec/openjdk.jdk"
-        dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
-        state: link
+    # - name: Create symbolic link to openjdk 
+    #   become: yes
+    #   file:
+    #     src: "/usr/local/opt/openjdk/libexec/openjdk.jdk"
+    #     dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
+    #     state: link
 
-    - name: Create symbolic link to openjdk11
-      become: yes
-      file:
-        src: "/usr/local/opt/openjdk@11/libexec/openjdk.jdk"
-        dest: "/Library/Java/JavaVirtualMachines/openjdk-11.jdk"
-        state: link
+    # - name: Create symbolic link to openjdk11
+    #   become: yes
+    #   file:
+    #     src: "/usr/local/opt/openjdk@11/libexec/openjdk.jdk"
+    #     dest: "/Library/Java/JavaVirtualMachines/openjdk-11.jdk"
+    #     state: link
 
-    - name: Add graalvm to path
-      lineinfile:
-        path: ~/.zshrc
-        line: export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home/bin:$PATH
-        insertafter: EOF
+    # - name: Add graalvm to path
+    #   lineinfile:
+    #     path: ~/.zshrc
+    #     line: export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home/bin:$PATH
+    #     insertafter: EOF
 
-    - name: Set JAVA_HOME to gradle
-      lineinfile:
-        path: ~/.zshrc
-        line: export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home
-        insertafter: EOF
+    # - name: Set JAVA_HOME to gradle
+    #   lineinfile:
+    #     path: ~/.zshrc
+    #     line: export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.0.0.2/Contents/Home
+    #     insertafter: EOF
 
 
     - name: Install native image with gu
