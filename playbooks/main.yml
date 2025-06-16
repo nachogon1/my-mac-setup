@@ -52,6 +52,13 @@
         state: present
         update_homebrew: yes
 
+    - name: Create symbolic link to openjdk 
+      become: yes
+      file:
+        src: "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
+        dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
+        state: link
+
     # - name: Create symbolic link to openjdk 
     #   become: yes
     #   file:
@@ -79,7 +86,7 @@
     #     insertafter: EOF
 
 
-    - name: Install native image with gu
-      shell: "source ~/.zshrc && gu install native-image"
+    # - name: Install native image with gu
+    #   shell: "source ~/.zshrc && gu install native-image"
 
 # Add session manager
