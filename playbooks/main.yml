@@ -59,6 +59,19 @@
         dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
         state: link
 
+    - name: Add homebrew jdk to path
+      lineinfile:
+        path: ~/.zshrc
+        line: export PATH=/opt/homebrew/opt/openjdk/bin:$PATH
+        insertafter: EOF
+    
+    - name: Set JAVA_HOME to gradle
+      lineinfile:
+        path: ~/.zshrc
+        line: export JAVA_HOME=/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home
+        insertafter: EOF
+
+
     # - name: Create symbolic link to openjdk 
     #   become: yes
     #   file:
