@@ -13,10 +13,10 @@ zsh Terminal
 ## Instructions
 
 
-If it is the first time you use it, install python with brew, link it, update pip and link pip
+If it is the first time you use it, install ansible first. You should use initial-script.sh (still only for mac). For that you should manually install chrome, sign-in log in git and download the script.
 
 Install ansible: # Recommended by ansible
-`python -m pip install ansible`
+ Ansible should be installed if you ran initial-script.sh. The designated environment is `ansible-env`
 
 Add ansible to path. Add to .zshrc
 `export PATH=“$HOME/Library/Python/3.9/bin:$PATH"`
