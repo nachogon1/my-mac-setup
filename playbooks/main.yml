@@ -19,7 +19,9 @@
         - intellij-idea
         - github
         - nordvpn
-        - whatsapp 
+        - whatsapp
+        - slack
+        - postman
     - name: "Install aws"
       shell: |
         curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
@@ -47,7 +49,7 @@
           'gradle',
           'java',
           'cfn-lint',
-          'gh'  # github cli. Pr's from cli
+          'gh'  # GitHub cli. Pr's from cli
         ]
         state: present
         update_homebrew: yes
